@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Update Night Logs Entry!</h1>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Edit Night Log:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.night_date.label() }}
+                {{ form.night_date(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.start_time.label() }}
+                {{ form.start_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.end_time.label() }}
+                {{ form.end_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.observation_site.label() }}
+                {{ form.observation_site(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.observation_sites') }}">Observation Sites</a>
+        page in order to add new observation sites.
+    </li>
+</ul>
+{% endblock %}
+

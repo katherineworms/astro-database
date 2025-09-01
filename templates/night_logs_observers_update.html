@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body_content %}
+<h1>Update Observer and Night Date Relationship Table Entry!</h1>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Edit Observer - Night Date Relationship:</legend>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.observer.label() }}
+                {{ form.observer(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.night_date.label() }}
+                {{ form.night_date(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.submit(class="btn btn-primary btn-lg") }}
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs') }}">Night Logs</a>
+        page in order to add a night log for a new date.
+    </li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.observers') }}">Observers</a>
+        page in order to add a new observer.
+    </li>
+</ul>
+{% endblock %}

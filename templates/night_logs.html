@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Night Logs!</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Night Log Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Observation Site</th>
+            <th>Observers</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result["id_night_log"] }}</td>
+            <td>{{ result["night_date"] }}</td>
+            <td>{{ result["start_time"] }}</td>
+            <td>{{ result["end_time"] }}</td>
+            <td>{{ result["observation_site"] }}</td>
+            <td>{{ result["Observers"] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.night_logs_update', entry_id=result['id_night_log'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_night_logs', entry_id=result['id_night_log'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.night_date.label() }}
+                {{ form.night_date(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.start_time.label() }}
+                {{ form.start_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.end_time.label() }}
+                {{ form.end_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.observation_site.label() }}
+                {{ form.observation_site(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br> 
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.observation_sites') }}">Observation Sites</a>
+        page in order to add new observation sites.
+    </li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs_observers') }}">Observer and Night Date Relationship</a>
+        page in order to assign an observer to a new night.
+    </li>
+</ul>
+{% endblock %}

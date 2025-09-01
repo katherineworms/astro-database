@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block body_content %}
+<h1>Observer and Night Date Relationship!</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Night Date</th>
+            <th>Observer</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result['id_night_logs_has_observers'] }}</td>
+            <td>{{ result['night_date'] }}</td>
+            <td>{{ result['observer'] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.night_logs_observers_update', entry_id=result['id_night_logs_has_observers'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_night_logs_has_observers', entry_id=result['id_night_logs_has_observers'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add Observer - Night Date Relationship:</legend>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.observer.label() }}
+                {{ form.observer(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.night_date.label() }}
+                {{ form.night_date(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.submit(class="btn btn-primary btn-lg") }}
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs') }}">Night Logs</a>
+        page in order to add a night log for a new date.
+    </li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.observers') }}">Observers</a>
+        page in order to add a new observer.
+    </li>
+</ul>
+{% endblock %}
+

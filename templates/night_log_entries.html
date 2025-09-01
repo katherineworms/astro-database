@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Night Log Entries!</h1>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Exposure Start Time (UTC)</th>
+            <th>Exposure Length (s)</th>
+            <th>Telescope Elevation (deg)</th>
+            <th>Telescope Azimuth (deg)</th>
+            <th>Night Log Date</th>
+            <th>Target Name</th>
+            <th>Comments</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result['id_night_log_entry'] }}</td>
+            <td>{{ result['exposure_start_time_utc'] }}</td>
+            <td>{{ result['exposure_length'] }}</td>
+            <td>{{ result['elevation'] }}</td>
+            <td>{{ result['azimuth'] }}</td>
+            <td>{{ result['night_date'] }}</td>
+            <td>{{ result['target_name'] }}</td>
+            <td>{{ result['comments'] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.night_log_entries_update', entry_id=result['id_night_log_entry'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_night_log_entries', entry_id=result['id_night_log_entry'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add Log Entry:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.start_time.label() }}
+                {{ form.start_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.exp_time.label() }}
+                {{ form.exp_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.el.label() }}
+                {{ form.el(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.az.label() }}
+                {{ form.az(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.night_log_date.label() }}
+                {{ form.night_log_date(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.target.label() }}
+                {{ form.target(class="form-control") }}
+            </div>
+            <div class="col-lg-6">
+                {{ form.comments.label() }}
+                {{ form.comments(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs') }}">Night Logs</a>
+        page in order to add a night log for a new date.
+    </li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.targets') }}">Targets</a>
+        page in order to add a night log for a new date.
+    </li>
+</ul>
+{% endblock %}

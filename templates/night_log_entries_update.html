@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Update Night Log Entry</h1>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Edit Log Entry:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.start_time.label() }}
+                {{ form.start_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.exp_time.label() }}
+                {{ form.exp_time(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.el.label() }}
+                {{ form.el(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.az.label() }}
+                {{ form.az(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.night_log_date.label() }}
+                {{ form.night_log_date(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.target.label() }}
+                {{ form.target(class="form-control") }}
+            </div>
+            <div class="col-lg-6">
+                {{ form.comments.label() }}
+                {{ form.comments(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs') }}">Night Logs</a>
+        page in order to add a night log for a new date.
+    </li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.targets') }}">Targets</a>
+        page in order to add a night log for a new date.
+    </li>
+</ul>
+{% endblock %}

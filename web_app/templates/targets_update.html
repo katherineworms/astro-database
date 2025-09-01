@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Update Target Entry!</h1>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Edit Target:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.name.label() }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.type.label() }}
+                {{ form.type(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.ra.label() }}
+                {{ form.ra(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.dec.label() }}
+                {{ form.dec(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.epoch.label() }}
+                {{ form.epoch(class="form-control") }}
+            </div>
+            <div class="col-lg-9">
+                {{ form.notes.label() }}
+                {{ form.notes(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Update Observation Sites Entry!</h1>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Edit Observation Site Entry:</legend>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.name.label() }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.latitude.label() }}
+                {{ form.latitude(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.longitude.label() }}
+                {{ form.longitude(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.el.label() }}
+                {{ form.el(class="form-control") }}
+            </div>
+            <div class="col-lg-8">
+                {{ form.notes.label() }}
+                {{ form.notes(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+</ul>
+{% endblock %}

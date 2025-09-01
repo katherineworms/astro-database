@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Targets!</h1>
+
+<h2>Browse All Targets.</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Target Type</th>
+            <th>Right Ascension</th>
+            <th>Declination</th>
+            <th>Epoch</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result['id_target'] }}</td>
+            <td>{{ result['name'] }}</td>
+            <td>{{ result['type'] }}</td>
+            <td>{{ result['ra'] }}</td>
+            <td>{{ result['deci'] }}</td>
+            <td>{{ result['epoch'] }}</td>
+            <td>{{ result['notes'] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.targets_update', entry_id=result['id_target'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_target', entry_id=result['id_target'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add Target:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.name.label() }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.type.label() }}
+                {{ form.type(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.ra.label() }}
+                {{ form.ra(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.dec.label() }}
+                {{ form.dec(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.epoch.label() }}
+                {{ form.epoch(class="form-control") }}
+            </div>
+            <div class="col-lg-9">
+                {{ form.notes.label() }}
+                {{ form.notes(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+</ul>
+{% endblock %}

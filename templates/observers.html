@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Observers!</h1>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Observer Surname</th>
+            <th>Observer Given Name</th>
+            <th>Observer Title</th>
+            <th>Observer Email Address</th>
+            <th>Observer Phone Number</th>
+            <th>Nights</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result['id_observer'] }}</td>
+            <td>{{ result['surname'] }}</td>
+            <td>{{ result['given_name'] }}</td>
+            <td>{{ result['title'] }}</td>
+            <td>{{ result['email'] }}</td>
+            <td>{{ result['phone_number'] }}</td>
+            <td>{{ result['night_dates'] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.observers_update', entry_id=result['id_observer'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_observers', entry_id=result['id_observer'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add Observer:</legend>
+        <div class="row">
+            <div class="col-lg-3">
+                {{ form.surname.label() }}
+                {{ form.surname(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.given_name.label() }}
+                {{ form.given_name(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.title.label() }}
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.email.label() }}
+                {{ form.email(class="form-control") }}
+            </div>
+            <div class="col-lg-3">
+                {{ form.phone_number.label() }}
+                {{ form.phone_number(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+    <li>
+        Please visit the
+        <a href="{{ url_for('main.night_logs_observers') }}">Observer and Night Date Relationship</a>
+        page in order to assign an observer to a new night.
+    </li>
+</ul>
+{% endblock %}

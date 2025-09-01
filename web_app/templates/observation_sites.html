@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+<h1>Observation Sites!</h1>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Elevation</th>
+            <th>Notes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result['id_observation_site'] }}</td>
+            <td>{{ result['name'] }}</td>
+            <td>{{ result['latitude'] }}</td>
+            <td>{{ result['longitude'] }}</td>
+            <td>{{ result['elevation'] }}</td>
+            <td>{{ result['notes'] }}</td>
+            <td>
+                <a class="btn btn-primary" href="{{url_for('main.observation_sites_update', entry_id=result['id_observation_site'])}}" role="button">Edit</a>
+                <a class="btn btn-danger" href="{{url_for('main.delete_observation_site', entry_id=result['id_observation_site'])}}" role="button">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <fieldset>
+        <legend>Add Observation Site:</legend>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.name.label() }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.latitude.label() }}
+                {{ form.latitude(class="form-control") }}
+            </div>
+            <div class="col-lg-4">
+                {{ form.longitude.label() }}
+                {{ form.longitude(class="form-control") }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                {{ form.el.label() }}
+                {{ form.el(class="form-control") }}
+            </div>
+            <div class="col-lg-8">
+                {{ form.notes.label() }}
+                {{ form.notes(class="form-control") }}
+            </div>
+        </div>
+        {{ form.submit(class="btn btn-primary btn-lg") }}
+    </fieldset>
+</form>
+
+<br>
+
+<h3>Notes</h3>
+<ul>
+    <li>An asterisk denotes that the field is mandatory.</li>
+</ul>
+{% endblock %}
